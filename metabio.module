@@ -1,0 +1,361 @@
+<?php
+// Form builder. Form ID = function name
+function metabio_form($form_state) {
+$form['Overview'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Overview'), 
+  '#collapsible' => TRUE, 
+  '#collapsed' => FALSE, 
+  '#tree' => TRUE,
+);
+$form['Overview']['Dataset_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Dataset name'),
+    '#size' => 50,
+    '#required' => FALSE,
+);
+  $form['Overview']['Dataset_description'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Dataset description'),
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+  );
+$form['Overview']['Data_collector'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Who collected the data?'),
+    '#size' => 50,
+    '#required' => FALSE,
+);
+$form['Overview']['Data_holder_contact'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Contact information for data holder'),
+  '#collapsible' => FALSE, 
+  '#tree' => TRUE,
+);
+$form['Overview']['Data_holder_contact']['Data_holder_first_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('First name'),
+    '#size' => 50,
+    '#required' => FALSE,
+    '#title_display' => 'invisible',
+    '#field_prefix' => t('First name'),
+);
+
+$form['Overview']['Data_holder_contact']['Data_holder_last_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Last name'),
+    '#size' => 50,
+    '#required' => FALSE,
+    '#title_display' => 'invisible',
+    '#field_prefix' => t('Last name'),
+);
+$form['Overview']['Data_holder_contact']['Data_holder_institution'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Institution'),
+    '#size' => 50,
+    '#required' => FALSE,
+    '#title_display' => 'invisible',
+    '#field_prefix' => t('Institution'),
+);
+
+$form['Overview']['Data_holder_contact']['Data_holder_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#size' => 50,
+    '#required' => FALSE,
+    '#title_display' => 'invisible',
+    '#field_prefix' => t('Email'),
+);
+
+$form['Overview']['Data_holder_contact']['Data_holder_phone'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Phone'),
+    '#size' => 50,
+    '#required' => FALSE,
+    '#title_display' => 'invisible',
+    '#field_prefix' => t('Phone'),
+);
+
+$form['Overview']['Data_holder_contact']['Data_holder_address'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Address'),
+    '#size' => 50,
+    '#required' => FALSE,
+    '#title_display' => 'invisible',
+    '#field_prefix' => t('Address'),
+);
+
+$form['Overview']['Other_institutions'] = array(
+    '#title' => t('Other institution(s) involved in data collection, analysis, archiving, etc. (e.g. university, government, department)'),
+     '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Overview']['Funding_sources'] = array(
+    '#title' => t('Funding sources for data collection'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Overview']['Dataset_format'] = array(
+    '#title' => t('In what format is the dataset?'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Overview']['Responsible_person'] = array(
+    '#title' => t('Person currently responsible for this metadata'),
+    '#type' => 'textfield',
+    '#size' => 50,
+    '#required' => FALSE,
+);
+
+$form['Overview']['Additional_comments'] = array(
+    '#title' => t('Any additional comments?'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Biology'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Biology'), 
+  '#collapsible' => TRUE, 
+  '#collapsed' => TRUE, 
+  '#tree' => TRUE,
+);
+ 
+$form['Biology']['Taxa_studied'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Taxa studied'),
+    '#size' => 100,
+    '#required' => TRUE,
+  );  
+  $form['Biology']['Taxonomic_information'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Mammals'), t('Marine mammals'),t('Birds'),t('Amphibians and reptiles'),t('Fish'),t('Insects'),t('Arthropods'),t('Crustaceans'),t('Non-arthropod invertebrate animals'),t('Vascular plants'),t('Non-vascular plants'),t('Mushrooms, molds and yeast'),t('Unicellular organisms'),t('Bacteria'))),
+  '#title' => t('Taxonomic information'),
+  );
+
+$form['Biology']['Taxonomic_details'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Add specific taxa here. Begin typing either the latin or common name to filter'),
+    '#size' => 100,
+    '#required' => TRUE,
+  );  
+
+$form['Study_details'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Study details'), 
+  '#collapsible' => TRUE, 
+  '#collapsed' => TRUE, 
+  '#tree' => TRUE,
+);
+$form['Study_details']['Study_design'] = array(
+    '#title' => t('Describe the study design?'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+ $form['Study_details']['Study_status'] = array(
+  '#type' => 'radios',
+  '#options' => array(0 => t('Ongoing'), 1 => t('Complete')),
+  '#title' => t('Study status'),
+  );
+
+ $form['Study_details']['Sampling_approaches'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Direct visual obseration(e.g. Fieldwork)'), t('Indirect visual observation (e.g. photos)'),t('Active sampling (e.g. electrofishing, plant vouchers)'),t('Passive sampling (e.g. insect or mammal traps)'),t('Remote sensing'))),
+  '#title' => t('Sampling approaches(es)'),
+  );
+
+$form['Study_details']['Study_goals'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Individual level (e.g. behaviour, physiology, autecology)'), t('Community level (e.g. richness, distribution, composition)'),t('Population/species level (e.g. systematic study)'),t('Ecosystem level'),t('Paleo-study'),t('Complete inventory'),t('Partial inventory'),t('Single species'))),
+  '#title' => t('Study goal(s)'),
+  );
+
+$form['Study_details']['Data type(s)'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Species list'), t('Presence/absence'),t('Abundance/relative abundance/frequency'),t('Biomass'),t('Size'),t('Relative coverage'),t('Genetics'),t('Other'))),
+  '#title' => t('Data type(s)'),
+  );
+
+$form['Study_details']['Frequency_of_sampling'] = array(
+    '#title' => t('Frequency of sampling'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Study_details']['First_year'] = array(
+    '#title' => t('First year of data collection'),
+    '#type' => 'date_select',
+    '#date_format' => 'Y',
+    '#default_value' => '2013',
+    '#date_year_range' => '-100:0',
+    '#required' => FALSE,
+    '#date_label_position' => 'within',
+);
+
+
+$form['Study_details']['Last_year'] = array(
+    '#title' => t('Last year of data collection'),
+    '#type' => 'date_select',
+    '#date_format' => 'Y',
+    '#default_value' => '2013',
+    '#date_year_range' => '-100:0',
+    '#required' => FALSE,
+    '#date_label_position' => 'within',
+);
+
+
+$form['Site_details'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Site details'), 
+  '#collapsible' => TRUE, 
+  '#collapsed' => TRUE, 
+  '#tree' => TRUE,
+);
+
+$form['Site_details']['Number_of_sites'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Number of sites included in the study'),
+    '#size' => 100,
+    '#required' => FALSE,
+);
+
+$form['Site_details']['Site_description'] = array(
+    '#title' => t('Decribe the site(s) (including distribution of sites if more than one)'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Site_details']['Site_habitat'] = array(
+    '#title' => t('Describe site habitat(s)'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Site_details']['Site_environment'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Aquatic'), t('Terrestrial'),t('Marine'),t('Aerial'))),
+  '#title' => t('Site environment(s)'),
+  '#required' => FALSE,
+);
+
+$form['Site_details']['Location_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Location name'),
+    '#size' => 100,
+    '#required' => FALSE,
+);
+
+$form['Citations'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Citations'), 
+  '#collapsible' => TRUE, 
+  '#collapsed' => TRUE, 
+  '#tree' => TRUE,
+);
+
+$form['Citations']['Publications_types'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Publication(s) in peer reviewed literature'), t('Thesis/es'),t('Report(s)'),t('Unpublished'),t('Database'))),
+  '#title' => t('Publications'),
+);
+
+$form['Citations']['Publications'] = array(
+    '#title' => t('List of publications'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Citations']['Publications_hyperlinks'] = array(
+    '#title' => t('Hyperlinks to publications'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Citations']['Publications_DOIs'] = array(
+    '#title' => t('DOIs publications'),
+    '#type' => 'textarea',
+    '#cols' => 50,
+    '#rows' => 6,
+    '#required' => FALSE,
+);
+
+$form['Citations']['Specimens'] = array(
+  '#type' => 'checkboxes',
+  '#options' => drupal_map_assoc(array(t('Specimens in a known collection'), t('Specimens not in a known collection'),t('No specimens collected'))),
+  '#title' => t('Specimens'),
+);
+
+$form['Citations']['Collections'] = array(
+  '#type' => 'textarea',
+  '#rows' => 6,
+  '#cols' => 50,
+  '#title' => t('Name of collection(s)'),
+);
+
+$form['Files'] = array(
+  '#type' => 'fieldset', 
+  '#title' => t('Files'), 
+  '#collapsible' => TRUE, 
+  '#collapsed' => TRUE, 
+  '#tree' => TRUE,
+);
+
+$form['Files']['']= array(
+    '#name' => 'files[' . implode('_', $element['#parents']) . ']',
+    '#type' => 'file',
+    '#title' => t('Choose a file'),
+    '#title_display' => 'invisible',
+    '#size' => 22,
+);
+$form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+);
+  return $form;
+}
+
+// Form submit handler. Default handler is formid_submit()
+function metabio_submit($form, &$form_state) {
+  $form_state['redirect'] = 'metabio/' . check_plain($form_state['values']['metabio']);
+}
+
+// Implementation of hook_menu(): used to create a page for the form
+function metabio_menu() {
+  $items['metabio'] = array(
+    'title' => 'Metabio form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('metabio_form'),
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+
+
