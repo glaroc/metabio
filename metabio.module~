@@ -326,6 +326,7 @@ $form['Files'] = array(
 );
 
 $form['Files']['']= array(
+    '#name' => 'files[' . implode('_', $element['#parents']) . ']',
     '#type' => 'file',
     '#title' => t('Choose a file'),
     '#title_display' => 'invisible',
